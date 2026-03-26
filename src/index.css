@@ -1,0 +1,138 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@700;800&family=Syne:wght@700;800&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+@layer base {
+  :root {
+    /* Backgrounds */
+    --bg-void: #030B18;           /* Deepest background — page bg */
+    --bg-primary: #050D1F;        /* Main background */
+    --bg-secondary: #0A1628;      /* Panels, sidebars */
+    --bg-surface: #0F1F3D;        /* Cards */
+    --bg-surface-hover: #132540;  /* Card hover state */
+    --bg-elevated: #1A2E4A;       /* Modals, dropdowns */
+    /* Borders */
+    --border-subtle: #1A3260;     /* Default card borders */
+    --border-medium: #244070;     /* Active state borders */
+    --border-strong: #3860A0;     /* Focus borders */
+    /* Accent — Cyan (Primary Action / Live Data) */
+    --accent-cyan: #00D4FF;
+    --accent-cyan-muted: rgba(0, 212, 255, 0.1);
+    --accent-cyan-hover: #33DDFF;
+    /* Accent — Violet (AI / Cognitive Layer) */
+    --accent-violet: #7B61FF;
+    --accent-violet-muted: rgba(123, 97, 255, 0.1);
+    /* Status Colors */
+    --status-success: #00E5A0;
+    --status-success-muted: rgba(0, 229, 160, 0.1);
+    --status-warning: #FFB800;
+    --status-warning-muted: rgba(255, 184, 0, 0.1);
+    --status-danger: #FF3B3B;
+    --status-danger-muted: rgba(255, 59, 59, 0.1);
+    --status-info: #4DA6FF;
+    --status-info-muted: rgba(77, 166, 255, 0.1);
+    /* Text */
+    --text-primary: #FFFFFF;
+    --text-secondary: #8BA3CC;
+    --text-muted: #4A6080;
+    --text-disabled: #2A4060;
+    /* Special */
+    --erb-red: #FF1A1A;
+    --erb-overlay: rgba(180, 0, 0, 0.95);
+    --gold: #FFD700;              /* For tier badges, premium indicators */
+  }
+  body {
+    @apply bg-void text-white antialiased;
+  }
+}
+@layer utilities {
+  .text-display {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+  }
+  .text-body {
+    font-family: 'DM Sans', sans-serif;
+  }
+  .text-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .text-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+  }
+  .bg-void { background-color: var(--bg-void); }
+  .bg-primary { background-color: var(--bg-primary); }
+  .bg-secondary { background-color: var(--bg-secondary); }
+  .bg-surface { background-color: var(--bg-surface); }
+  .bg-surface-hover { background-color: var(--bg-surface-hover); }
+  .bg-elevated { background-color: var(--bg-elevated); }
+  .border-subtle { border-color: var(--border-subtle); }
+  .border-medium { border-color: var(--border-medium); }
+  .border-strong { border-color: var(--border-strong); }
+  .text-primary { color: var(--text-primary); }
+  .text-secondary { color: var(--text-secondary); }
+  .text-muted { color: var(--text-muted); }
+  .text-disabled { color: var(--text-disabled); }
+  .text-cyan { color: var(--accent-cyan); }
+  .text-violet { color: var(--accent-violet); }
+  .text-success { color: var(--status-success); }
+  .text-warning { color: var(--status-warning); }
+  .text-danger { color: var(--status-danger); }
+  .text-info { color: var(--status-info); }
+  .text-gold { color: var(--gold); }
+  .card {
+    @apply bg-surface border border-subtle rounded-lg p-6 transition-colors duration-200;
+  }
+  .card:hover {
+    @apply bg-surface-hover border-medium;
+  }
+}
+@keyframes agentPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4); }
+  70%  { box-shadow: 0 0 0 10px rgba(0, 212, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0); }
+}
+@keyframes erbPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+@keyframes feedEntry {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-agent-pulse {
+  animation: agentPulse 2s infinite;
+}
+.animate-erb-pulse {
+  animation: erbPulse 1.5s infinite;
+}
+.animate-feed-entry {
+  animation: feedEntry 0.3s ease-out forwards;
+}
+.animate-shimmer {
+  background: linear-gradient(90deg, var(--bg-surface) 25%, var(--bg-surface-hover) 50%, var(--bg-surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
